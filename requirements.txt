@@ -1,0 +1,35 @@
+# ClaimEquity AI - Dependencies
+# Note: For hackathon, assume pre-installed libraries
+# Install with: pip install -r requirements.txt
+
+# Core Framework
+streamlit>=1.28.0
+
+# PDF Processing
+PyPDF2>=3.0.0
+
+# Natural Language Processing
+transformers>=4.30.0
+torch>=2.0.0
+nltk>=3.8.0
+
+# Data Science & ML
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+matplotlib>=3.7.0
+
+# Database
+# sqlite3 is built-in to Python
+
+# API Requests
+requests>=2.31.0
+
+# Utilities
+hashlib  # Built-in
+os  # Built-in
+pickle  # Built-in
+
+# Optional: For AWS deployment (Amazon prize)
+# boto3>=1.28.0
+
