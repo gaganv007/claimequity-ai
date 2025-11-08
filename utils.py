@@ -32,7 +32,7 @@ def parse_claim(file):
         return f"Error parsing PDF: {str(e)}"
 
 
-def summarize_claim(text, use_openai=False, api_key=None):
+def summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key=None):
     """
     Summarize insurance claim text
     
@@ -40,12 +40,50 @@ def summarize_claim(text, use_openai=False, api_key=None):
         text: Claim text to summarize
         use_openai: Whether to use OpenAI API (better quality)
         api_key: OpenAI API key if use_openai is True
+        use_xai: Whether to use xAI Grok API
+        xai_key: xAI API key if use_xai is True
     
     Returns:
         str: Summary of the claim
     """
     if not text or len(text.strip()) == 0:
         return "No text found in claim document."
+    
+    # Try xAI Grok first if available (for hackathon prize eligibility)
+    if use_xai and xai_key:
+        try:
+            url = "https://api.x.ai/v1/chat/completions"
+            headers = {
+                "Authorization": f"Bearer {xai_key}",
+                "Content-Type": "application/json"
+            }
+            # Truncate text to avoid token limits
+            truncated_text = text[:4000] if len(text) > 4000 else text
+            payload = {
+                "model": "grok-3",
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": "You are a healthcare insurance claim expert. Summarize claims in plain English, highlighting key details like diagnosis codes, denial reasons, and treatment costs."
+                    },
+                    {
+                        "role": "user",
+                        "content": f"Summarize this insurance claim in plain English, focusing on what was denied and why: {truncated_text}"
+                    }
+                ],
+                "temperature": 0.3,
+                "max_tokens": 500
+            }
+            response = requests.post(url, json=payload, headers=headers, timeout=30)
+            response.raise_for_status()
+            result = response.json()
+            return result['choices'][0]['message']['content']
+        except Exception as e:
+            # Fallback to OpenAI or other methods if xAI fails
+            if use_openai and api_key:
+                return summarize_claim(text, use_openai=True, api_key=api_key, use_xai=False, xai_key=None)
+            else:
+                return summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key=None)
     
     if use_openai and api_key:
         try:
@@ -76,11 +114,12 @@ def summarize_claim(text, use_openai=False, api_key=None):
             result = response.json()
             return result['choices'][0]['message']['content']
         except Exception as e:
-            # Fallback to Hugging Face if OpenAI fails
+            # Fallback to simple summarization if OpenAI fails
             return summarize_claim(text, use_openai=False, api_key=None)
     else:
-        # Fallback Hugging Face summarization
+        # Fallback: Try Hugging Face, then simple text extraction
         try:
+            # Try to use transformers pipeline
             summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
             # Limit text length for model
             truncated_text = text[:1000] if len(text) > 1000 else text
@@ -89,7 +128,94 @@ def summarize_claim(text, use_openai=False, api_key=None):
             summary = summarizer(truncated_text, max_length=150, min_length=50, do_sample=False)
             return summary[0]['summary_text']
         except Exception as e:
-            return f"Summarization error: {str(e)}. Original text (first 500 chars): {text[:500]}"
+            # If transformers fails (e.g., Keras compatibility), use simple extraction
+            error_msg = str(e)
+            if "Keras" in error_msg or "tf-keras" in error_msg:
+                # Use simple text extraction as fallback
+                return simple_text_summary(text)
+            else:
+                # For other errors, also use simple summary
+                return simple_text_summary(text)
+
+
+def simple_text_summary(text):
+    """
+    Simple text-based summarization fallback when ML models fail
+    Extracts key information from claim text
+    
+    Args:
+        text: Claim text
+    
+    Returns:
+        str: Simple summary with key information
+    """
+    if not text or len(text.strip()) == 0:
+        return "No text found in claim document."
+    
+    # Extract key information using simple text parsing
+    summary_parts = []
+    
+    # Extract insurance company
+    if "Insurance Company:" in text:
+        company_line = [line for line in text.split('\n') if "Insurance Company:" in line]
+        if company_line:
+            summary_parts.append(f"**Insurance:** {company_line[0].split('Insurance Company:')[-1].strip()}")
+    
+    # Extract claim number
+    if "Claim Number:" in text:
+        claim_line = [line for line in text.split('\n') if "Claim Number:" in line]
+        if claim_line:
+            summary_parts.append(f"**Claim Number:** {claim_line[0].split('Claim Number:')[-1].strip()}")
+    
+    # Extract denial reason
+    denial_keywords = ["DENIAL REASON", "Denial Reason", "denial reason"]
+    for keyword in denial_keywords:
+        if keyword in text:
+            lines = text.split('\n')
+            for i, line in enumerate(lines):
+                if keyword in line:
+                    summary_parts.append(f"**Denial:** {line.split(':')[-1].strip() if ':' in line else line}")
+                    # Also get explanation if available
+                    if i + 1 < len(lines) and "Explanation" in lines[i+1]:
+                        explanation = lines[i+2] if i+2 < len(lines) else ""
+                        if explanation.strip():
+                            summary_parts.append(f"**Reason:** {explanation.strip()[:200]}")
+                    break
+    
+    # Extract claim amount
+    amount_keywords = ["Total Claim Amount:", "Claim Amount:", "Billed Amount:"]
+    for keyword in amount_keywords:
+        if keyword in text:
+            amount_line = [line for line in text.split('\n') if keyword in line]
+            if amount_line:
+                amount = amount_line[0].split(':')[-1].strip()
+                summary_parts.append(f"**Amount:** {amount}")
+                break
+    
+    # Extract diagnosis codes
+    if "ICD-10" in text or "ICD" in text:
+        import re
+        icd_pattern = r'[A-Z]\d{2}\.?\d*'
+        icd_codes = re.findall(icd_pattern, text)
+        if icd_codes:
+            unique_codes = list(set(icd_codes[:5]))  # Limit to 5 codes
+            summary_parts.append(f"**Diagnosis Codes:** {', '.join(unique_codes)}")
+    
+    # Extract procedure codes
+    if "CPT" in text:
+        import re
+        cpt_pattern = r'\d{5}'
+        cpt_codes = re.findall(cpt_pattern, text)
+        if cpt_codes:
+            unique_codes = list(set(cpt_codes[:5]))  # Limit to 5 codes
+            summary_parts.append(f"**Procedure Codes:** {', '.join(unique_codes)}")
+    
+    # If we found key information, return formatted summary
+    if summary_parts:
+        return "\n\n".join(summary_parts) + "\n\n*Note: This is a simple text extraction. For better summaries, use OpenAI API or fix Keras compatibility.*"
+    else:
+        # Fallback: return first 500 chars with context
+        return f"**Claim Summary (Text Extraction):**\n\n{text[:500]}...\n\n*Note: Using simple text extraction. For better summaries, configure OpenAI API or fix ML model dependencies.*"
 
 
 def init_db():

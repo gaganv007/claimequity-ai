@@ -1,0 +1,112 @@
+================================================================================
+                    MEDICARE ADVANTAGE CLAIM DENIAL
+================================================================================
+
+Insurance Company: UnitedHealthcare Medicare Advantage
+Claim Number: UHC-MA-2024-982347
+Date of Notice: October 28, 2024
+Beneficiary: [BENEFICIARY NAME]
+Medicare ID: 123-45-6789A
+
+================================================================================
+                            BENEFICIARY INFORMATION
+================================================================================
+
+Beneficiary Name: Jane Smith
+Date of Birth: 07/22/1950
+Medicare ID: 123-45-6789A
+Plan Type: Medicare Advantage Plan PPO
+Plan Number: H1234-001
+
+================================================================================
+                            CLAIM DETAILS
+================================================================================
+
+Date of Service: October 10, 2024
+Provider Name: Advanced Physical Therapy Center
+Provider NPI: 9876543210
+Provider Specialty: Physical Therapy
+
+Service Details:
+- Date: 10/10/2024
+  Procedure Code (CPT): 97110 - Therapeutic procedure, one or more areas
+  Diagnosis Code (ICD-10): M54.5 - Low back pain
+  Units: 4 units (60 minutes)
+  Billed Amount: $320.00
+  Allowed Amount: $0.00
+  Patient Responsibility: $320.00
+
+- Date: 10/10/2024
+  Procedure Code (CPT): 97112 - Therapeutic procedure, neuromuscular reeducation
+  Diagnosis Code (ICD-10): M54.5 - Low back pain
+  Units: 2 units (30 minutes)
+  Billed Amount: $180.00
+  Allowed Amount: $0.00
+  Patient Responsibility: $180.00
+
+Total Claim Amount: $500.00
+Total Denied Amount: $500.00
+
+================================================================================
+                            DENIAL INFORMATION
+================================================================================
+
+DENIAL REASON CODE: NMN-002
+DENIAL REASON: Not Medically Necessary
+
+Explanation:
+This claim has been denied because the physical therapy services provided were 
+determined to be not medically necessary based on the documentation submitted.
+
+Our medical review team found that:
+1. The treatment plan does not demonstrate functional improvement goals
+2. Insufficient documentation of progress from previous sessions
+3. The frequency and duration of services exceed what is typically considered 
+   medically necessary for this diagnosis
+4. No clear treatment plan or expected outcomes were documented
+
+According to Medicare guidelines and your plan's medical policy, physical 
+therapy services must be:
+- Medically necessary for the treatment of a specific condition
+- Provided under a written plan of care
+- Expected to result in measurable functional improvement
+- Provided by a qualified physical therapist
+
+The documentation submitted does not meet these criteria.
+
+================================================================================
+                            APPEAL INFORMATION
+================================================================================
+
+You may appeal this decision within 60 days of receiving this notice.
+
+Level 1 Appeal - Redetermination:
+Submit a written request with:
+- This denial notice
+- Medical records from the provider
+- Letter of medical necessity from your physician
+- Any additional supporting documentation
+
+Mail to:
+UnitedHealthcare Medicare Appeals
+P.O. Box 5678
+Minneapolis, MN 55440
+
+Or call: 1-800-555-9876
+
+If the appeal is denied, you have the right to request a Level 2 Appeal 
+(Reconsideration) with an Independent Review Entity.
+
+================================================================================
+                            PROVIDER INFORMATION
+================================================================================
+
+If you believe this denial is in error, please contact your provider to:
+1. Verify that all required documentation was submitted
+2. Request that they submit additional medical records
+3. Obtain a letter of medical necessity if not previously submitted
+
+================================================================================
+                            END OF NOTICE
+================================================================================
+

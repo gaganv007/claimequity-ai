@@ -1,0 +1,110 @@
+Below is a detailed, realistic health insurance claim denial document formatted as text that mimics a professional PDF-style document. It includes all requested sections, medical codes, and insurance terminology to ensure authenticity.
+
+---
+
+**Blue Horizon Health Insurance**  
+1234 Insurance Way, Suite 500  
+Springfield, IL 62704  
+Phone: (800) 555-1234 | Fax: (800) 555-1235  
+www.bluehorizonhealth.com  
+
+**Claim Denial Notice**  
+**Date of Notice:** October 15, 2023  
+**Claim Number:** BH-2023-987654  
+**Member ID:** 1234567890  
+
+**Patient Information:**  
+Name: John A. Smith  
+Date of Birth: 03/15/1975  
+Address: 456 Oak Street, Springfield, IL 62701  
+
+---
+
+### **Claim Summary**
+
+| **Date of Service** | **Provider Name**          | **Procedure Code (CPT)** | **Diagnosis Code (ICD-10)** | **Billed Amount** | **Allowed Amount** | **Paid Amount** |
+|---------------------|----------------------------|--------------------------|-----------------------------|-------------------|--------------------|-----------------|
+| 09/10/2023          | Dr. Emily Carter, MD       | 99213 (Office Visit)     | E11.9 (Type 2 Diabetes)     | $150.00           | $0.00              | $0.00           |
+| 09/10/2023          | Dr. Emily Carter, MD       | 83036 (HbA1c Test)       | E11.9 (Type 2 Diabetes)     | $75.00            | $0.00              | $0.00           |
+| 09/10/2023          | Springfield Diagnostics    | 93000 (Electrocardiogram)| I10 (Hypertension)          | $200.00           | $0.00              | $0.00           |
+
+**Total Billed Amount:** $425.00  
+**Total Allowed Amount:** $0.00  
+**Total Paid Amount:** $0.00  
+
+---
+
+### **Denial Details**
+
+**Denial Reason:** Prior Authorization Required  
+**Denial Code:** PR-96 (Non-Covered Charge(s) Due to Lack of Prior Authorization)  
+**Service(s) Denied:**  
+- CPT 99213 (Office Visit)  
+- CPT 83036 (HbA1c Test)  
+- CPT 93000 (Electrocardiogram)  
+
+**Effective Date of Denial:** October 15, 2023  
+
+---
+
+### **Explanation of Denial**
+
+Dear Mr. Smith,  
+
+Blue Horizon Health Insurance has reviewed the claim submitted by Dr. Emily Carter, MD, and Springfield Diagnostics for services rendered on September 10, 2023. After careful consideration, we must deny payment for the above-listed services due to the absence of prior authorization.  
+
+Under the terms of your Blue Horizon Health Plan (Policy #BH-GOLD-2023), prior authorization is required for certain diagnostic and outpatient services, including office visits for chronic condition management (CPT 99213), laboratory testing such as HbA1c (CPT 83036), and diagnostic procedures like electrocardiograms (CPT 93000). Our records indicate that no prior authorization request was submitted or approved for these services before the date of service.  
+
+This determination was made in accordance with our medical policy guidelines (Policy MP-2023-045: Prior Authorization for Outpatient Services) and the provider contract agreement. As a result, the billed charges of $425.00 are not covered under your plan, and you may be responsible for the full amount. Please contact your provider to discuss payment arrangements if necessary.  
+
+If you or your provider believe this determination is incorrect, or if prior authorization was obtained but not recorded in our system, you have the right to appeal this decision. Please refer to the appeal instructions below for further details.  
+
+---
+
+### **Appeal Information**
+
+If you disagree with this claim denial, you or your authorized representative may file an appeal. Blue Horizon Health Insurance offers a formal appeal process to ensure a fair and thorough review of your case.  
+
+**How to File an Appeal:**  
+1. Submit a written request for appeal within 180 days from the date of this notice (October 15, 2023). Appeals received after April 12, 2024, will not be considered.  
+2. Include the following information in your appeal:  
+   - Member Name and ID Number (1234567890)  
+   - Claim Number (BH-2023-987654)  
+   - Date(s) of Service (09/10/2023)  
+   - A detailed explanation of why you believe the denial is incorrect  
+   - Any supporting documentation (e.g., proof of prior authorization, medical records, or provider statements)  
+3. Mail your appeal to:  
+   Blue Horizon Health Insurance  
+   Attn: Appeals and Grievances Department  
+   1234 Insurance Way, Suite 500  
+   Springfield, IL 62704  
+4. Alternatively, you may submit your appeal electronically via our secure member portal at www.bluehorizonhealth.com/appeals or by fax to (800) 555-1235.  
+
+**Appeal Review Process:**  
+- You will receive written acknowledgment of your appeal within 5 business days of receipt.  
+- A decision will be rendered within 30 calendar days for standard appeals or within 72 hours for expedited appeals if the situation involves urgent medical care.  
+- If additional information is required to process your appeal, we will notify you in writing.  
+
+**External Review:**  
+If your appeal is denied, you may have the right to request an independent external review, as outlined in your Evidence of Coverage (EOC) document. Additional information will be provided upon completion of the internal appeal process.  
+
+**Questions or Assistance:**  
+For questions regarding this denial or the appeal process, please contact our Member Services team at (800) 555-1234, available Monday through Friday, 8:00 AM to 5:00 PM CST. You may also email us at memberservices@bluehorizonhealth.com.  
+
+---
+
+**Important Notes:**  
+- This denial does not affect other claims or services under your policy.  
+- You are not required to pay for denied services until the appeal process is complete if an appeal is filed.  
+- Retain a copy of this notice and any correspondence for your records.  
+
+**Sincerely,**  
+Amanda Johnson  
+Claims Review Specialist  
+Blue Horizon Health Insurance  
+
+**Confidentiality Notice:** This document contains personal health information protected under the Health Insurance Portability and Accountability Act (HIPAA). If you are not the intended recipient, please destroy this document and notify us immediately at (800) 555-1234.  
+
+---
+
+This document is formatted to reflect the structure and tone of a real insurance claim denial letter, complete with realistic medical codes (CPT and ICD-10), insurance-specific terminology, and detailed appeal instructions. You can copy this text into a word processor or PDF generator to create a visually formatted document with headers, tables, and professional styling if needed. Let me know if you'd like a revised version with additional details or a different denial reason!

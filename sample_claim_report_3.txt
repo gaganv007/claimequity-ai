@@ -1,0 +1,109 @@
+================================================================================
+                    COMMERCIAL INSURANCE CLAIM DENIAL
+================================================================================
+
+Insurance Company: Aetna Health Insurance
+Claim Number: AET-2024-456782
+Date of Notice: November 1, 2024
+Subscriber: [SUBSCRIBER NAME]
+Member ID: AET-456789012
+
+================================================================================
+                            MEMBER INFORMATION
+================================================================================
+
+Subscriber Name: Robert Johnson
+Date of Birth: 11/20/1985
+Member ID: AET-456789012
+Group Number: GRP-789456
+Plan Type: PPO Plan
+
+================================================================================
+                            CLAIM DETAILS
+================================================================================
+
+Date of Service: September 25, 2024
+Provider Name: Out-of-Network Specialist Group
+Provider NPI: 5556667778
+Provider Specialty: Cardiology
+
+Service Details:
+- Date: 09/25/2024
+  Procedure Code (CPT): 93000 - Electrocardiogram, routine ECG with at least 12 leads
+  Diagnosis Code (ICD-10): I10 - Essential (primary) hypertension
+  Billed Amount: $450.00
+  Allowed Amount: $0.00
+  Patient Responsibility: $450.00
+
+- Date: 09/25/2024
+  Procedure Code (CPT): 99245 - Office consultation for a new or established patient
+  Diagnosis Code (ICD-10): I10, R06.02 - Hypertension, Shortness of breath
+  Billed Amount: $650.00
+  Allowed Amount: $0.00
+  Patient Responsibility: $650.00
+
+Total Claim Amount: $1,100.00
+Total Denied Amount: $1,100.00
+
+================================================================================
+                            DENIAL INFORMATION
+================================================================================
+
+DENIAL REASON CODE: OON-003
+DENIAL REASON: Out of Network Provider - No Authorization
+
+Explanation:
+This claim has been denied because the services were rendered by an out-of-network 
+provider, and no prior authorization was obtained for these services.
+
+Your Aetna PPO plan provides coverage for out-of-network services only when:
+1. Prior authorization is obtained from Aetna before receiving services
+2. The services are determined to be medically necessary
+3. An in-network provider is not available within a reasonable distance
+
+In this case:
+- The provider, Out-of-Network Specialist Group, is not in the Aetna network
+- No prior authorization was requested or obtained
+- There are in-network cardiologists available in your area
+- The services could have been provided by an in-network provider
+
+According to your plan documents, out-of-network services without authorization 
+are not covered, except in emergency situations.
+
+================================================================================
+                            COVERAGE ALTERNATIVES
+================================================================================
+
+We have identified the following in-network cardiologists in your area:
+- Dr. Sarah Williams, Princeton Cardiology Associates (5 miles)
+- Dr. Michael Chen, Central Jersey Heart Center (8 miles)
+- Dr. Emily Rodriguez, Garden State Cardiology (12 miles)
+
+To find more in-network providers, visit: www.aetna.com/findadoctor
+Or call: 1-800-555-2468
+
+================================================================================
+                            APPEAL INFORMATION
+================================================================================
+
+You may appeal this denial if you believe:
+1. This was an emergency situation requiring immediate care
+2. An in-network provider was not reasonably available
+3. You were not informed that the provider was out-of-network
+
+To file an appeal:
+1. Submit within 180 days of this notice
+2. Include medical records and documentation
+3. Provide explanation of why out-of-network care was necessary
+
+Mail to:
+Aetna Appeals Department
+151 Farmington Avenue
+Hartford, CT 06156
+
+Or submit online: www.aetna.com/member/appeals
+
+================================================================================
+                            END OF NOTICE
+================================================================================
+

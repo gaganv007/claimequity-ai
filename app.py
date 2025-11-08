@@ -80,14 +80,17 @@ with st.sidebar:
     
     openai_key = st.text_input("OpenAI API Key", type="password", help="For claim summarization")
     dedalus_key = st.text_input("Dedalus Labs API Key", type="password", help="For AI agent appeal generation")
-    xai_key = st.text_input("xAI (Grok) API Key", type="password", help="For real-time bias analysis")
+    # Get xAI key from environment variable or user input
+    default_xai_key = os.getenv('XAI_API_KEY', '')
+    xai_key = st.text_input("xAI (Grok) API Key", type="password", value=default_xai_key, help="For claim summarization and real-time bias analysis")
     knot_key = st.text_input("Knot API Key", type="password", help="For payment links")
     cap_one_key = st.text_input("Capital One API Key", type="password", help="For financial impact")
     amplitude_key = st.text_input("Amplitude API Key", type="password", help="For analytics")
     
     st.divider()
     st.header("📊 Settings")
-    use_openai = st.checkbox("Use OpenAI for Summarization", value=bool(openai_key))
+    use_xai = st.checkbox("Use xAI Grok for Summarization", value=bool(xai_key), help="Uses your xAI credits for better summaries")
+    use_openai = st.checkbox("Use OpenAI for Summarization", value=False, help="Alternative to xAI")
     enable_analytics = st.checkbox("Enable Analytics", value=bool(amplitude_key))
     
     # Database status
@@ -133,12 +136,16 @@ with tab1:
             
             # Summarize
             st.subheader("📝 Claim Summary")
-            with st.spinner("Generating summary..."):
+            with st.spinner("Generating summary with xAI Grok..." if use_xai else "Generating summary..."):
                 summary = summarize_claim(
                     claim_text,
                     use_openai=use_openai and bool(openai_key),
-                    api_key=openai_key if use_openai else None
+                    api_key=openai_key if use_openai else None,
+                    use_xai=use_xai and bool(xai_key),
+                    xai_key=xai_key if use_xai else None
                 )
+                if use_xai:
+                    st.success("✅ Summary generated using xAI Grok API")
                 st.write(summary)
             
             # Extract features for ML

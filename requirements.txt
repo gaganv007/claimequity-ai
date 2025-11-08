@@ -25,10 +25,8 @@ matplotlib>=3.7.0
 # API Requests
 requests>=2.31.0
 
-# Utilities
-hashlib  # Built-in
-os  # Built-in
-pickle  # Built-in
+# Note: hashlib, os, pickle, and sqlite3 are built-in Python modules
+# They don't need to be installed via pip
 
 # Optional: For AWS deployment (Amazon prize)
 # boto3>=1.28.0

@@ -1,0 +1,111 @@
+================================================================================
+                    HEALTHCARE INSURANCE CLAIM DENIAL NOTICE
+================================================================================
+
+Insurance Company: BlueCross BlueShield of New Jersey
+Claim Number: BCBS-NJ-2024-847293
+Date of Notice: November 5, 2024
+Policy Holder: [PATIENT NAME]
+Member ID: BCBS-789456123
+Group Number: 12345
+
+================================================================================
+                            PATIENT INFORMATION
+================================================================================
+
+Patient Name: John Doe
+Date of Birth: 03/15/1975
+Member ID: BCBS-789456123
+Policy Number: POL-2024-456789
+
+================================================================================
+                            CLAIM DETAILS
+================================================================================
+
+Date of Service: September 15, 2024 - September 22, 2024
+Provider Name: Princeton Medical Associates
+Provider NPI: 1234567890
+Tax ID: 12-3456789
+
+Service Details:
+- Date: 09/15/2024
+  Procedure Code (CPT): 99213 - Office or other outpatient visit
+  Diagnosis Code (ICD-10): E11.9 - Type 2 diabetes mellitus without complications
+  Billed Amount: $250.00
+  Allowed Amount: $0.00
+  Patient Responsibility: $250.00
+
+- Date: 09/18/2024
+  Procedure Code (CPT): 36415 - Routine venipuncture for collection of specimen
+  Diagnosis Code (ICD-10): E11.9 - Type 2 diabetes mellitus without complications
+  Billed Amount: $85.00
+  Allowed Amount: $0.00
+  Patient Responsibility: $85.00
+
+- Date: 09/22/2024
+  Procedure Code (CPT): 99214 - Office or other outpatient visit (established patient)
+  Diagnosis Code (ICD-10): E11.9, I10 - Type 2 diabetes, Essential hypertension
+  Billed Amount: $300.00
+  Allowed Amount: $0.00
+  Patient Responsibility: $300.00
+
+Total Claim Amount: $635.00
+Total Denied Amount: $635.00
+
+================================================================================
+                            DENIAL INFORMATION
+================================================================================
+
+DENIAL REASON CODE: PA-001
+DENIAL REASON: Prior Authorization Required
+
+Explanation:
+This claim has been denied because the services rendered require prior authorization 
+from BlueCross BlueShield of New Jersey, and no authorization was obtained before 
+the date of service.
+
+According to your plan benefits, the following services require prior authorization:
+- Office visits (CPT 99213, 99214) when related to chronic conditions
+- Laboratory services for diabetes management
+- Specialist consultations for diabetes care
+
+The provider, Princeton Medical Associates, did not obtain the required prior 
+authorization before rendering these services on the dates listed above.
+
+================================================================================
+                            APPEAL INFORMATION
+================================================================================
+
+You have the right to appeal this denial. To file an appeal:
+
+1. Submit a written appeal within 180 days of this notice
+2. Include the following information:
+   - This denial notice
+   - Medical records supporting medical necessity
+   - Provider's statement of medical necessity
+   - Any additional documentation
+
+3. Mail to:
+   BlueCross BlueShield Appeals Department
+   P.O. Box 1234
+   Newark, NJ 07101
+
+4. Or submit online at: www.bcbsnj.com/appeals
+
+If you have questions, contact Member Services at 1-800-555-1234
+
+================================================================================
+                            ADDITIONAL NOTES
+================================================================================
+
+This denial does not affect your right to receive emergency services. If you 
+believe this was an emergency situation, please contact Member Services 
+immediately.
+
+For questions about your benefits or coverage, please refer to your Summary 
+of Benefits and Coverage (SBC) or contact Member Services.
+
+================================================================================
+                            END OF NOTICE
+================================================================================
+

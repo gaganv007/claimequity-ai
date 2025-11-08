@@ -228,7 +228,7 @@ def grok_real_time_analysis(query, api_key=None):
             "Content-Type": "application/json"
         }
         payload = {
-            "model": "grok-beta",
+            "model": "grok-3",
             "messages": [
                 {
                     "role": "system",
