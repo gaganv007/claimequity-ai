@@ -77,7 +77,7 @@ def summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key
             response = requests.post(url, json=payload, headers=headers, timeout=30)
             response.raise_for_status()
             result = response.json()
-            summary = result['choices'][0']['message']['content']
+            summary = result["choices"][0]["message"]["content"]
             return summary, True  # Successfully used xAI
         except requests.exceptions.HTTPError as e:
             # HTTP error (401, 403, 404, etc.)
