@@ -137,15 +137,17 @@ with tab1:
             # Summarize
             st.subheader("📝 Claim Summary")
             with st.spinner("Generating summary with xAI Grok..." if use_xai else "Generating summary..."):
-                summary = summarize_claim(
+                summary, used_xai = summarize_claim(
                     claim_text,
                     use_openai=use_openai and bool(openai_key),
                     api_key=openai_key if use_openai else None,
                     use_xai=use_xai and bool(xai_key),
                     xai_key=xai_key if use_xai else None
                 )
-                if use_xai:
+                if used_xai:
                     st.success("✅ Summary generated using xAI Grok API")
+                elif use_xai and not used_xai:
+                    st.warning("⚠️ xAI API failed, using fallback summarization. Check your API key and credits.")
                 st.write(summary)
             
             # Extract features for ML

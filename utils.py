@@ -44,10 +44,10 @@ def summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key
         xai_key: xAI API key if use_xai is True
     
     Returns:
-        str: Summary of the claim
+        tuple: (summary_text, used_xai) - summary and whether xAI was successfully used
     """
     if not text or len(text.strip()) == 0:
-        return "No text found in claim document."
+        return "No text found in claim document.", False
     
     # Try xAI Grok first if available (for hackathon prize eligibility)
     if use_xai and xai_key:
@@ -77,13 +77,34 @@ def summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key
             response = requests.post(url, json=payload, headers=headers, timeout=30)
             response.raise_for_status()
             result = response.json()
-            return result['choices'][0]['message']['content']
-        except Exception as e:
-            # Fallback to OpenAI or other methods if xAI fails
+            summary = result['choices'][0']['message']['content']
+            return summary, True  # Successfully used xAI
+        except requests.exceptions.HTTPError as e:
+            # HTTP error (401, 403, 404, etc.)
+            error_msg = f"xAI API HTTP error: {e.response.status_code if hasattr(e, 'response') else 'Unknown'}"
+            if hasattr(e, 'response') and e.response is not None:
+                try:
+                    error_detail = e.response.json()
+                    error_msg += f" - {error_detail}"
+                except:
+                    error_msg += f" - {e.response.text[:200]}"
+            print(error_msg)  # Debug output
             if use_openai and api_key:
-                return summarize_claim(text, use_openai=True, api_key=api_key, use_xai=False, xai_key=None)
+                summary, _ = summarize_claim(text, use_openai=True, api_key=api_key, use_xai=False, xai_key=None)
+                return summary, False
             else:
-                return summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key=None)
+                summary, _ = summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key=None)
+                return summary, False
+        except Exception as e:
+            # Other errors (network, timeout, etc.)
+            error_msg = f"xAI API error: {type(e).__name__}: {str(e)}"
+            print(error_msg)  # Debug output
+            if use_openai and api_key:
+                summary, _ = summarize_claim(text, use_openai=True, api_key=api_key, use_xai=False, xai_key=None)
+                return summary, False
+            else:
+                summary, _ = summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key=None)
+                return summary, False
     
     if use_openai and api_key:
         try:
@@ -112,10 +133,11 @@ def summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key
             response = requests.post(url, json=payload, headers=headers, timeout=30)
             response.raise_for_status()
             result = response.json()
-            return result['choices'][0]['message']['content']
+            return result['choices'][0]['message']['content'], False
         except Exception as e:
             # Fallback to simple summarization if OpenAI fails
-            return summarize_claim(text, use_openai=False, api_key=None)
+            summary, _ = summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key=None)
+            return summary, False
     else:
         # Fallback: Try Hugging Face, then simple text extraction
         try:
@@ -124,18 +146,18 @@ def summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key
             # Limit text length for model
             truncated_text = text[:1000] if len(text) > 1000 else text
             if len(truncated_text) < 50:
-                return "Text too short to summarize."
+                return "Text too short to summarize.", False
             summary = summarizer(truncated_text, max_length=150, min_length=50, do_sample=False)
-            return summary[0]['summary_text']
+            return summary[0]['summary_text'], False
         except Exception as e:
             # If transformers fails (e.g., Keras compatibility), use simple extraction
             error_msg = str(e)
             if "Keras" in error_msg or "tf-keras" in error_msg:
                 # Use simple text extraction as fallback
-                return simple_text_summary(text)
+                return simple_text_summary(text), False
             else:
                 # For other errors, also use simple summary
-                return simple_text_summary(text)
+                return simple_text_summary(text), False
 
 
 def simple_text_summary(text):
