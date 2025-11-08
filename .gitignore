@@ -72,3 +72,5 @@ synthetic_claims.csv
 *.csv
 *.xlsx
 
+node_modules/
+package-lock.json
