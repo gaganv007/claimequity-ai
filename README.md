@@ -114,20 +114,29 @@ This project is eligible for multiple tracks and sponsor prizes:
    pip install -r requirements.txt
    ```
 
-3. **Download NLTK data** (first run)
-   ```python
-   import nltk
-   nltk.download('punkt')
+3. **Set up API keys** (optional but recommended)
+   ```bash
+   # Set xAI key (for claim summarization)
+   export XAI_API_KEY='xai-your-key-here'
+   
+   # Or use the helper script
+   ./set_xai_key.sh 'xai-your-key-here'
+   ```
+   See `ENV_SETUP.md` for detailed instructions on all API keys.
+
+4. **Download NLTK data** (first run)
+   ```bash
+   python setup.py
    ```
 
-4. **Run the application**
+5. **Run the application**
    ```bash
    streamlit run app.py
    ```
 
-5. **Access the app**
+6. **Access the app**
    - Open browser to `http://localhost:8501`
-   - Configure API keys in the sidebar (optional)
+   - Enter API keys in the sidebar if not set as environment variables
    - Upload a claim PDF and explore features
 
 ## 📊 Data Sources
