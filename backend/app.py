@@ -18,7 +18,14 @@ from models import (
 )
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for React frontend
+# Enable CORS for React frontend with proper configuration
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ["http://localhost:3000", "http://127.0.0.1:3000"],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    }
+})
 
 # Initialize database on startup
 db_conn = init_db()
@@ -234,7 +241,20 @@ def bias_heatmap_endpoint():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
+    print("=" * 60)
     print("Starting ClaimEquity AI Backend API...")
+    print("=" * 60)
     print("API will be available at http://localhost:5000")
-    app.run(debug=True, port=5000)
+    print("CORS enabled for: http://localhost:3000")
+    print("Press Ctrl+C to stop")
+    print("=" * 60)
+    try:
+        app.run(debug=True, port=5000, host='0.0.0.0')
+    except OSError as e:
+        if "Address already in use" in str(e):
+            print(f"\n❌ Error: Port 5000 is already in use")
+            print("   Try: lsof -ti:5000 | xargs kill")
+            print("   Or change the port in app.py")
+        else:
+            raise
 
