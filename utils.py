@@ -51,6 +51,9 @@ def summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key
     
     # Try xAI Grok first if available (for hackathon prize eligibility)
     if use_xai and xai_key:
+        # Validate API key format
+        if not xai_key.startswith('xai-'):
+            print(f"⚠️ Warning: xAI API key doesn't start with 'xai-'. Key provided: {xai_key[:10]}...")
         try:
             url = "https://api.x.ai/v1/chat/completions"
             headers = {
@@ -81,30 +84,46 @@ def summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key
             return summary, True  # Successfully used xAI
         except requests.exceptions.HTTPError as e:
             # HTTP error (401, 403, 404, etc.)
-            error_msg = f"xAI API HTTP error: {e.response.status_code if hasattr(e, 'response') else 'Unknown'}"
+            status_code = e.response.status_code if hasattr(e, 'response') and e.response else 'Unknown'
+            error_detail = ""
             if hasattr(e, 'response') and e.response is not None:
                 try:
-                    error_detail = e.response.json()
-                    error_msg += f" - {error_detail}"
+                    error_json = e.response.json()
+                    error_detail = str(error_json)
                 except:
-                    error_msg += f" - {e.response.text[:200]}"
-            print(error_msg)  # Debug output
+                    error_detail = e.response.text[:200] if e.response.text else ""
+            error_msg = f"xAI API HTTP {status_code}: {error_detail}"
+            print(f"❌ xAI API Error: {error_msg}")  # Debug output
+            # Return error info in summary for user visibility
+            error_summary = f"⚠️ xAI API failed (HTTP {status_code}). Using fallback summarization.\n\n"
             if use_openai and api_key:
                 summary, _ = summarize_claim(text, use_openai=True, api_key=api_key, use_xai=False, xai_key=None)
-                return summary, False
+                return error_summary + summary, False
             else:
                 summary, _ = summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key=None)
-                return summary, False
+                return error_summary + summary, False
+        except requests.exceptions.RequestException as e:
+            # Network errors, timeouts, etc.
+            error_msg = f"xAI API network error: {type(e).__name__}: {str(e)}"
+            print(f"❌ {error_msg}")  # Debug output
+            error_summary = f"⚠️ xAI API network error. Using fallback summarization.\n\n"
+            if use_openai and api_key:
+                summary, _ = summarize_claim(text, use_openai=True, api_key=api_key, use_xai=False, xai_key=None)
+                return error_summary + summary, False
+            else:
+                summary, _ = summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key=None)
+                return error_summary + summary, False
         except Exception as e:
-            # Other errors (network, timeout, etc.)
+            # Other errors
             error_msg = f"xAI API error: {type(e).__name__}: {str(e)}"
-            print(error_msg)  # Debug output
+            print(f"❌ {error_msg}")  # Debug output
+            error_summary = f"⚠️ xAI API error: {str(e)[:100]}. Using fallback summarization.\n\n"
             if use_openai and api_key:
                 summary, _ = summarize_claim(text, use_openai=True, api_key=api_key, use_xai=False, xai_key=None)
-                return summary, False
+                return error_summary + summary, False
             else:
                 summary, _ = summarize_claim(text, use_openai=False, api_key=None, use_xai=False, xai_key=None)
-                return summary, False
+                return error_summary + summary, False
     
     if use_openai and api_key:
         try:

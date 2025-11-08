@@ -83,6 +83,12 @@ with st.sidebar:
     # Get xAI key from environment variable or user input
     default_xai_key = os.getenv('XAI_API_KEY', '')
     xai_key = st.text_input("xAI (Grok) API Key", type="password", value=default_xai_key, help="For claim summarization and real-time bias analysis")
+    
+    # Show if key is set (for debugging)
+    if xai_key:
+        st.caption(f"✅ xAI key set: {xai_key[:10]}...{xai_key[-4:] if len(xai_key) > 14 else ''}")
+    else:
+        st.caption("⚠️ No xAI key provided. Set XAI_API_KEY environment variable or enter in field above.")
     knot_key = st.text_input("Knot API Key", type="password", help="For payment links")
     cap_one_key = st.text_input("Capital One API Key", type="password", help="For financial impact")
     amplitude_key = st.text_input("Amplitude API Key", type="password", help="For analytics")
@@ -148,7 +154,11 @@ with tab1:
                     st.success("✅ Summary generated using xAI Grok API")
                 elif use_xai and not used_xai:
                     st.warning("⚠️ xAI API failed, using fallback summarization. Check your API key and credits.")
-                st.write(summary)
+                    # Show error details if available
+                    with st.expander("🔍 Error Details (Click to view)"):
+                        st.code("Check the terminal/console for detailed error messages", language="text")
+                        st.info("Common issues:\n- API key not set or incorrect\n- Insufficient credits\n- Network/connectivity issues\n- API rate limits")
+                st.markdown(summary)
             
             # Extract features for ML
             claim_features = get_claim_features(claim_text)
